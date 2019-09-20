@@ -1,5 +1,5 @@
 [package]
-name = "raymarching"
+name = "vulkan-compute"
 version = "0.1.0"
 authors = ["Nyrox <root@nyrox.tech>"]
 edition = "2018"
@@ -7,10 +7,5 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-minifb="0.13"
-
-
-[workspace]
-members=[
-	"vulkan-compute"
-]
+vulkano="*"
+vulkano-shaders="*"

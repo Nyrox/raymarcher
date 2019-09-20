@@ -158,6 +158,18 @@ pub mod sdf {
 		}
 	}
 
+	fn mix(a: f64, b: f64, m: f64) -> f64 {
+		a + ((b - a) * m)
+	}
+
+	pub fn smooth_min(s1: impl Fn(Vector3) -> f64, s2: impl Fn(Vector3) -> f64, k: f64) -> impl Fn(Vector3) -> f64 {
+		move |p| {
+			let (a, b) = (s1(p), s2(p));
+			let h = (0.5+0.5*(b-a)/k).min(1.0).max(0.0);
+			return mix(b, a, h) - k*h*(1.0-h);
+		}
+	}
+
 	pub fn difference(s1: impl Fn(Vector3) -> f64, s2: impl Fn(Vector3) -> f64) -> impl Fn(Vector3) -> f64 {
 		move |p| {
 			s1(p).max(-s2(p))
@@ -170,12 +182,13 @@ use minifb::{Key, Window, WindowOptions};
 fn scene(pos: Vector3) -> f64 {
 	let sdf = {
 		sdf::difference(
-		sdf::min(
+		sdf::smooth_min(
 			sdf::sphere(3.0),
 			sdf::translate(
 				sdf::sphere(2.0),
 				Vector3::new(0.0, 3.5, 0.0),
-			)
+			),
+			1.0
 		),
 		sdf::translate(
 			sdf::sphere(2.5),
@@ -215,7 +228,7 @@ fn main() {
 	let mut time = ::std::time::Instant::now();
 
 	while window.is_open() && !window.is_key_down(Key::Escape) {
-		if time.elapsed().as_millis() < 16 {
+		if time.elapsed().as_millis() < 200 {
 			continue;
 		}
 		time = ::std::time::Instant::now();
