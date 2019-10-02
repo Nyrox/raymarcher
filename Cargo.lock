@@ -329,6 +329,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "raymarcher_core"
+version = "0.1.0"
+
+[[package]]
+name = "raymarcher_vulkan"
+version = "0.1.0"
+dependencies = [
+ "vulkano 0.14.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "vulkano-shaders 0.14.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "raymarching"
 version = "0.1.0"
 dependencies = [
@@ -429,6 +441,14 @@ version = "0.6.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
+name = "standalone"
+version = "0.1.0"
+dependencies = [
+ "minifb 0.13.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "raymarcher_vulkan 0.1.0",
+]
+
+[[package]]
 name = "syn"
 version = "0.15.44"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -457,14 +477,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "vk-sys"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-
-[[package]]
-name = "vulkan-compute"
-version = "0.1.0"
-dependencies = [
- "vulkano 0.14.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "vulkano-shaders 0.14.0 (registry+https://github.com/rust-lang/crates.io-index)",
-]
 
 [[package]]
 name = "vulkano"

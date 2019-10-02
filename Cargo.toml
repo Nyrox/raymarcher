@@ -12,5 +12,7 @@ minifb="0.13"
 
 [workspace]
 members=[
-	"vulkan-compute"
+	"vulkan-compute",
+	"standalone",
+	"core"
 ]
